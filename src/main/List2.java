@@ -8,6 +8,10 @@ import static java.lang.Math.sin;
 public class List2 {
     private Vector2[] ls =new Vector2[6];
 
+    public Vector2[] getList(){
+        return ls;
+    }
+
     public List2(){
         Vector2 tmp = new Vector2(0,0,1);
         for (int i = 0; i < 6; i++) {
@@ -41,16 +45,20 @@ public class List2 {
         Matrix2 mf = new Matrix2();
         Matrix2 mtc = new Matrix2();
         Matrix2 mt = new Matrix2();
+        Matrix2 mb = new Matrix2();
         double cosx=(cos(Math.PI*degree/180));
         double sinx=(sin(Math.PI*degree/180));
         mf.identify();
         mt.identify();
         mtc.identify();
-        System.out.println("inside");
         mf.getM()[0].setByIndex(0,cosx);
         mf.getM()[1].setByIndex(1,cosx);
         mf.getM()[0].setByIndex(1,sinx);
         mf.getM()[1].setByIndex(0,-sinx);
+
+        mb.getM()[0].setByIndex(0,1.004);
+        mb.getM()[1].setByIndex(1,1.004);
+
 
         mtc.getM()[2].setByIndex(0,-cp.getX());
         mtc.getM()[2].setByIndex(1,-cp.getY());
@@ -63,7 +71,12 @@ public class List2 {
             list.setVectorByIndex(i, list.getVectorByIndex(i).vectorsProdByMatrix(mtc));
             list.setVectorByIndex(i, list.getVectorByIndex(i).vectorsProdByMatrix(mf));
             list.setVectorByIndex(i, list.getVectorByIndex(i).vectorsProdByMatrix(mt));
+            list.setVectorByIndex(i, list.getVectorByIndex(i).vectorsProdByMatrix(mb));
         }
+        for (int i=0; i<6; i++) {
+            list.getVectorByIndex(i).setY(list.getVectorByIndex(i).getY()+1);
+        }
+
     }
 
 }

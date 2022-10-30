@@ -12,8 +12,8 @@ public class GraphicPanel2 extends JPanel implements Runnable {
 
     GraphicPanel2(JFrame main){
         this.main=main;
-        cx=main.getWidth()/2;
-        cy=main.getHeight()/2;
+        cx=main.getWidth()-main.getWidth()/4-100;
+        cy=main.getHeight()/4;
         cpoint.setX(cx);
         cpoint.setY(cy);
         list.setVectorByIndex(0,new Vector2(cx-50,cy-10,1));
@@ -61,13 +61,22 @@ public class GraphicPanel2 extends JPanel implements Runnable {
 
     @Override
     public void run() {
+
         try {
-                while(true) {
-                    System.out.println("dasdas");
-                    list.rotateSquare(list, 2, new Vector2(getWidth() / 2, 0, 1));
-                    Thread.sleep(1000);
-                    repaint();
-                }
+            while(true){
+                System.out.println("das");
+                while(list.getList()[3].getY()<main.getHeight()-40) {
+
+                    while (list.getList()[5].getByIndex(0)>getWidth()/4&& list.getList()[3].getY()<main.getHeight()-40) {
+                        Thread.sleep(30);
+                        list.rotateSquare(list, 1, new Vector2(getWidth() / 2, 0, 1));
+                        repaint();
+                    }
+                    while   (list.getList()[5].getByIndex(0)<getWidth()-getWidth()/4 && list.getList()[3].getY()<main.getHeight()-40){
+                        list.rotateSquare(list, -1, new Vector2(getWidth() / 2, 0, 1));
+                        repaint();
+                    Thread.sleep(30);}
+                }}
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
